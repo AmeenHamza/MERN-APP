@@ -1,0 +1,18 @@
+.checkout {
+    max-width: 70%;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 3% auto;
+}
+
+.checkout h2 {
+    text-transform: uppercase;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 12px;
+}
+
+.checkout .table>:not(caption)>*>* {
+    padding: 1.5rem 2.5rem;
+}

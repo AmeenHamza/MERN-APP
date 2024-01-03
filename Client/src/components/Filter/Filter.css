@@ -1,0 +1,65 @@
+.filter {
+    width: 23%;
+    height: 85vh;
+    margin-top: 12px;
+    position: fixed;
+    color: #fff;
+}
+
+.filter h1 {
+    font-size: 30px;
+}
+
+.form-check-input:checked {
+    background-color: #212529;
+    border-color: #212529;
+}
+
+@media (max-width : 1148px) and (min-width : 992px) {
+
+    .filter h1 {
+        font-size: 26px;
+    }
+
+    .form-check-inline {
+        font-size: 17px;
+    }
+
+    .rating-side {
+        font-size: 17px;
+    }
+
+    .filter button {
+        padding: 9px 6px;
+    }
+}
+
+@media (max-width : 992px) {
+    .filter {
+        width: 100%;
+        position: relative;
+    }
+}
+
+@media (max-width : 991px) {
+    .filter {
+        min-height: 67vh;
+        height: auto;
+    }
+    
+    .filter h1 {
+        font-size: 26px;
+    }
+
+    .form-check-inline {
+        font-size: 17px;
+    }
+
+    .rating-side {
+        font-size: 17px;
+    }
+
+    .filter button {
+        padding: 9px 6px;
+    }
+}

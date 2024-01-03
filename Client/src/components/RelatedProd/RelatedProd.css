@@ -1,0 +1,46 @@
+.related-prod {
+    width: 80%;
+    height: auto;
+    margin: auto;
+}
+
+.related {
+    text-align: center;
+    padding: 5% 0;
+    font-size: 46px;
+    font-weight: 700;
+}
+
+.take .item {
+    margin: 5% 0;
+}
+
+@media (max-width : 720px) and (min-width : 660px) {
+    .take .item img {
+        width: 213px;
+        height: 60%;
+    }
+
+    .take .item {
+        width: 220px;
+    }
+
+    .take .item p {
+        font-size: 13px;
+    }
+}
+
+@media (max-width : 600px) {
+    .related-prod {
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .related {
+        font-size: 26px;
+    }
+
+    .take .item {
+        margin: 20% 0;
+    }
+}

@@ -1,0 +1,17 @@
+.custom-loader {
+    width: 100%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-container .row {
+    margin-left: 0 !important;
+}
+
+@media (max-width : 600px) {
+    .category-item:nth-child(2n-1) {
+        margin-right: 12px;
+    }
+}

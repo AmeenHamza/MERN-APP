@@ -1,0 +1,36 @@
+.br-image {
+    width: 80px;
+    height: 40px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.pr-image {
+    width: 100px;
+    height: 50px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.custom-admin{
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+tbody tr td:nth-child(5) {
+    flex: none !important; /* Disable flex property */
+    display: table-cell !important; /* Set back to table cell */
+    width: auto !important; /* Reset width property */
+    cursor: pointer;
+}
+
+tbody tr td:nth-child(6) {
+    cursor: pointer;
+}
+
+.font-small {
+    font-size: 13px;
+}

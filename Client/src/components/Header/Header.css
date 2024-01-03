@@ -1,0 +1,291 @@
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    box-shadow: 0 1px 3px -2px #000;
+    position: relative;
+}
+
+.navbar.colorChange {
+    background-color: #fff;
+}
+
+.navbar.colorChange .colorChange {
+    height: 20px !important;
+}
+
+/* .navbar.colorChange .nav-menu hr {
+    background-color: #fff;
+} */
+
+.navbar.colorChange .nav-login-cart button {
+    border: 1px solid #7a7a7a;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    list-style-type: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #626262;
+}
+
+.nav-menu li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    cursor: pointer;
+    margin-bottom: -21px;
+}
+
+.nav-menu hr {
+    border: none;
+    width: 80%;
+    height: 3px;
+    background-color: #FF4141;
+    border-radius: 10px;
+    margin-top: 2px;
+    opacity: 1;
+}
+
+.nav-login-cart {
+    display: flex;
+    align-items: center;
+    gap: 45px;
+}
+
+.nav-login-cart button {
+    width: 120px;
+    outline: none;
+    border: 1px solid #7a7a7a;
+    color: #515151;
+    background-color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 30px;
+    cursor: pointer;
+    padding: 8px 24px;
+}
+
+.nav-login-cart button:active {
+    background-color: #f3f3f3;
+}
+
+.nav-login-cart img {
+    width: 34px;
+}
+
+.nav-cart-count {
+    display: flex;
+    width: 22px;
+    height: 22px;
+    justify-content: center;
+    align-items: center;
+    margin-top: -35px;
+    margin-left: -55px;
+    border-radius: 11px;
+    font-size: 14px;
+    background-color: red;
+    color: #fff;
+}
+
+.form-control:focus {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+}
+
+/* Hamburger css */
+
+.hamburger {
+    border: 0;
+    height: 60px;
+    width: 60px;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+    position: absolute;
+    top: 50%;
+    right: 25px;
+    transform: translateY(-50%);
+    background-color: transparent;
+    display: none;
+}
+
+.user-icon img {
+    width: 30px;
+}
+
+.user-icon {
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 1200px) {
+    .search {
+        margin: 0 14px;
+    }
+}
+
+@media (max-width : 1185px) {
+    .search {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: block;
+    }
+
+    .navigation ul {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        flex-direction: column;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background-color: white;
+        border-top: 1px solid black;
+    }
+
+    .navigation.expanded ul {
+        display: block;
+    }
+
+    .nav-menu li {
+        text-align: center;
+        margin: 0;
+    }
+
+    .nav-menu li a {
+        color: black;
+        width: 100%;
+        padding: 1.5rem 0;
+    }
+
+    .nav-menu li:hover {
+        background-color: #eee;
+    }
+}
+
+@media (max-width : 995px) {
+    .nav-menu {
+        gap: 30px;
+    }
+
+    .nav-menu li a {
+        font-size: 15px;
+    }
+
+    .nav-login-cart button {
+        font-size: 16px;
+        width: 100px;
+        padding: 6px 24px;
+    }
+
+    .nav-login-cart img {
+        width: 26px;
+    }
+
+    .nav-cart-count {
+        width: 16px;
+        height: 16px;
+        margin-top: -26px;
+        margin-left: -53px;
+        font-size: 14px;
+    }
+
+    .navbar-brand img {
+        width: 50px;
+    }
+}
+
+@media (max-width: 757px) {
+    .navbar>.container {
+        gap: 20px !important;
+        width: 100% !important;
+        justify-content: flex-start !important;
+    }
+
+    .nav-menu hr {
+        width: 50%;
+        height: 2px;
+    }
+
+    .navbar.colorChange .nav-menu hr {
+        background-color: #FF4141;
+    }
+}
+
+@media (max-width : 408px) {
+    .navbar>.container {
+        gap: 0.5vw !important;
+        width: 100% !important;
+        justify-content: first baseline !important;
+    }
+
+    .nav-login-cart button {
+        font-size: 12px;
+        width: 77px;
+        padding: 5px 20px;
+    }
+
+    .nav-login-cart img {
+        width: 20px;
+    }
+
+    .nav-login-cart {
+        gap: 22px;
+    }
+
+    .nav-cart-count {
+        width: 14px;
+        height: 14px;
+        margin-top: -19px;
+        margin-left: -30px;
+        font-size: 9px;
+    }
+
+    .navbar-brand img {
+        width: 40px;
+    }
+
+    .hamburger {
+        width: 40px;
+        height: 40px;
+        background-color: transparent;
+        right: 0;
+    }
+
+    .nav-menu hr {
+        width: 20%;
+        height: 2px;
+    }
+}
+
+/* .cartitem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 20px;
+    margin-bottom: 20px;
+}
+
+.cartItemImg {
+    width: 55px;
+    height: 55px;
+    object-fit: cover;
+    object-position: center;
+}
+
+.cartItemDetail {
+    display: flex;
+    flex: 1;
+    padding: 0 20px;
+    flex-direction: column;
+} */
