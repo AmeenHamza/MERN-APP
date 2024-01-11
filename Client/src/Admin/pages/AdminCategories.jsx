@@ -24,7 +24,6 @@ const AdminCategories = () => {
     axios.get(`/api/category/get-all-categories`)
       .then((res) => {
         setCategories(res.data.categories)
-        console.log(res.data.message)
       })
       .catch((err) => console.log(err))
   }, [])
@@ -34,12 +33,10 @@ const AdminCategories = () => {
 
     axios.delete(`/api/category/delete-category?CategoryName=${CategoryName}`)
       .then(json => {
-        console.log(json);
         setCategories(json.data.Categories);
       })
       .catch(err => {
         console.log(err);
-        console.log("first");
       });
   };
 

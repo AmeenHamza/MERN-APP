@@ -7,7 +7,7 @@ import axios from 'axios';
 
 function ProductByName() {
     const [show, setShow] = useState(false);
-    const [productName, setProductName] = useState("");
+    const [productId, setProductId] = useState("");
     const [productDetails, setproductDetails] = useState({})
 
     const productKeys = productDetails ? Object.keys(productDetails).length : null;
@@ -15,7 +15,7 @@ function ProductByName() {
     const handleClose = () => {
         setShow(false);
         setproductDetails()
-        setProductName("")
+        setProductId("")
     }
     const handleShow = () => setShow(true);
 
@@ -23,20 +23,17 @@ function ProductByName() {
         e.preventDefault();
 
         // Connect to our backend
-        axios.get(`/api/product/find-product?title=${productName}`)
+        axios.get(`/api/product/find-product?id=${productId}`)
             .then(json => {
-                console.log(json)
                 setproductDetails(json.data.product)
             })
             .catch(err => console.log(err))
-
-        console.log(productName)
     }
 
     const handleClear = (e) => {
         e.preventDefault();
         setproductDetails();
-        setProductName("");
+        setProductId("");
     }
     return (
         <>
@@ -54,13 +51,13 @@ function ProductByName() {
                 </Modal.Header>
                 <Modal.Body>
                     <form className="product-form" onSubmit={productDetails && productKeys > 0 ? handleClear : handleSubmit}>
-                        <p className="product-form-title">Find product With Name</p>
+                        <p className="product-form-title">Find product With id</p>
                         <div className="input-container">
                             <input
                                 type="text"
                                 placeholder="Enter product Name"
-                                value={productName}
-                                onChange={(e) => setProductName(e.target.value)}
+                                value={productId}
+                                onChange={(e) => setProductId(e.target.value)}
                             />
                         </div>
                         {

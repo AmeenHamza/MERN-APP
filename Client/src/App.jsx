@@ -5,11 +5,11 @@ import './App.css'
 import { BrowserRouter, Navigate, Link, Route, Routes } from 'react-router-dom'
 import Layout from '../Layout'
 import { Cart, Categories, Checkout, Home, Products, SingleCategory, SingleProduct } from './pages'
-import { Contact, Footer, Header, Login, Signup } from './components'
+import { Contact, Footer, Header, Login, Signup, UserProfile } from './components'
 import { useCart } from './context/Context'
 import axios from 'axios'
 import { AdminHeader } from './Admin/components'
-import { AdminCategories, AdminHome, Brands, AdminProducts, Orders } from './Admin/pages'
+import { AdminCategories, AdminHome, Brands, AdminProducts, Orders, Users } from './Admin/pages'
 import Cookies from 'js-cookie'
 import { jwtDecode } from 'jwt-decode'
 
@@ -58,6 +58,7 @@ const App = () => {
                 <Route path='/brands' element={<Brands />} />
                 <Route path='/products' element={<AdminProducts />} />
                 <Route path='/orders' element={<Orders />} />
+                <Route path='/users' element={<Users />} />
               </>
             ) : userRole === "guest" ?
               (
@@ -91,6 +92,7 @@ const App = () => {
                         <>
                           <Route path='/login' element={<Login />} />
                           <Route path='/checkout' element={<Checkout />} />
+                          <Route path='/user' element={<UserProfile />} />
                         </>
                         :
                         (null)

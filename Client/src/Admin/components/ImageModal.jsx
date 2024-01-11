@@ -9,7 +9,7 @@ function ImageModal({ imageURL }) {
     return (
         <>
             <p variant='light' onClick={() => setSmShow(true)} className="me-2">
-                <img className='pr-image' src={imageURL} alt="Preview" />
+                <img className='br-image-user' src={imageURL} alt="Preview" />
             </p>
             <Modal
                 size="lg"

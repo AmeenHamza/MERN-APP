@@ -9,8 +9,8 @@ const Category = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    axios.get('https://fakestoreapi.com/products/categories')
-      .then((res) => setCategories(res.data))
+    axios.get('/api/category/get-all-categories')
+      .then((res) => setCategories(res.data.categories))
       .catch((err) => console.log(err.message))
   }, [])
 
@@ -30,7 +30,7 @@ const Category = () => {
             categories.length > 0 ? (
               categories.map((category, index) => (
                 <div key={index} className="category-container col-xl-3 col-lg-3 col-md-4 col-sm-5 col-12">
-                  <CategoryTitle category={category} image={images[index]} />
+                  <CategoryTitle category={category.CategoryName} image={images[index]} />
                 </div>
               ))) : (
               <div className='custom-loader'>

@@ -3,19 +3,18 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../css/AddCategory.css';
 import axios from 'axios';
-;
 
-function BrandById() {
+function UserByEmail() {
     const [show, setShow] = useState(false);
-    const [brandId, setBrandId] = useState("");
-    const [brandDetails, setBrandDetails] = useState({})
+    const [email, setEmail] = useState("");
+    const [userDetails, setuserDetails] = useState({})
 
-    const brandKeys = brandDetails ? Object.keys(brandDetails).length : null;
+    const userKeys = userDetails ? Object.keys(userDetails).length : null;
 
     const handleClose = () => {
         setShow(false);
-        setBrandDetails()
-        setBrandId("")
+        setuserDetails()
+        setEmail("")
     }
     const handleShow = () => setShow(true);
 
@@ -23,22 +22,22 @@ function BrandById() {
         e.preventDefault();
 
         // Connect to our backend
-        axios.get(`/api/brand/brandbyid?brandId=${brandId}`)
+        axios.get(`/api/user/find-user?email=${email}`)
             .then(json => {
-                setBrandDetails(json.data.brand)
+                setuserDetails(json.data.user)
             })
             .catch(err => console.log(err))
     }
 
     const handleClear = (e) => {
         e.preventDefault();
-        setBrandDetails();
-        setBrandId("");
+        setuserDetails();
+        setEmail("");
     }
     return (
         <>
             <Button variant="dark" onClick={handleShow}>
-                Find Brand
+                Find User
             </Button>
 
             <Modal
@@ -50,22 +49,22 @@ function BrandById() {
                 <Modal.Header closeButton>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className="brand-form" onSubmit={brandDetails && brandKeys > 0 ? handleClear : handleSubmit}>
-                        <p className="brand-form-title">Find Brand With Id</p>
+                    <form className="user-form" onSubmit={userDetails && userKeys > 0 ? handleClear : handleSubmit}>
+                        <p className="user-form-title">Find user</p>
                         <div className="input-container">
                             <input
-                                type="text"
-                                placeholder="Enter Brand Id"
-                                value={brandId}
-                                onChange={(e) => setBrandId(e.target.value)}
+                                type="email"
+                                placeholder="Enter user email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         {
-                            brandDetails && brandKeys > 0 ? (
+                            userDetails && userKeys > 0 ? (
                                 <div className='mb-5 px-4'>
-                                    <div className='w-50 mx-auto mb-3'><img className='img-fluid w-50' src={brandDetails.BrandImage} /></div>
-                                    <h4>Brand Name : <span className='text-warning'>{brandDetails.BrandName}</span></h4>
-                                    <h5>Brand Category : <span className='text-warning'>{brandDetails.Category}</span></h5>
+                                    <div className='w-50 mx-auto mb-3'><img className='img-fluid w-50' src={userDetails.profile} /></div>
+                                    <h4>User Name : <span className='text-warning'>{userDetails.username}</span></h4>
+                                    <h5>User Role : <span className='text-warning'>{userDetails.role}</span></h5>
                                 </div>
                             ) : (
                                 null
@@ -76,10 +75,10 @@ function BrandById() {
                             className="submit"
                         >
                             {
-                                brandDetails && brandKeys > 0 ? (
+                                userDetails && userKeys > 0 ? (
                                     "Clear"
                                 ) : (
-                                    "Find Brand"
+                                    "Find user"
                                 )
                             }
                         </button>
@@ -91,4 +90,4 @@ function BrandById() {
     );
 }
 
-export default BrandById;
+export default UserByEmail;

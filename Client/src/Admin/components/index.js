@@ -11,5 +11,8 @@ import ProductByName from "./Products/ProductByID"
 import ImageModal from "./ImageModal"
 import OrderByID from "./orders/OrderByID"
 import UpdateOrder from "./orders/UpdateOrder"
+import UserModal from "./Users/UserModal"
+import UpdateUser from "./Users/UpdateUser"
+import UserByEmail from "./Users/UserByEmail"
 
-export { AdminHeader, BrandModal, UpdateBrand, BrandById, CategoryById, CategoryModal, Updatecategory, ProductModal, UpdateProduct, ProductByName, ImageModal, OrderByID, UpdateOrder }
+export { AdminHeader, BrandModal, UpdateBrand, BrandById, CategoryById, CategoryModal, Updatecategory, ProductModal, UpdateProduct, ProductByName, ImageModal, OrderByID, UpdateOrder, UserModal, UpdateUser, UserByEmail }

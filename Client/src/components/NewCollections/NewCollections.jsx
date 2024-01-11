@@ -8,7 +8,7 @@ const NewCollections = () => {
     const { state: { products } } = useCart();
     const categories = ["men's clothing", "women's clothing", "jewelery", "electronics"];
 
-    const result = products.reduce((accumulator, product) => {
+    const result = products?.reduce((accumulator, product) => {
         const categoryIndex = categories.indexOf(product.category);
 
         if (categoryIndex !== -1 && accumulator[categoryIndex].length < 2) {

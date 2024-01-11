@@ -10,14 +10,14 @@ const SingleCategory = () => {
     const [category, setCategory] = useState([]);
     const { categoryName } = useParams();
     useEffect(() => {
-        axios.get(`https://fakestoreapi.com/products/category/${categoryName}`)
-            .then((res) => setCategory(res.data))
+        axios.get(`/api/product/by-category?category=${categoryName.toLowerCase()}`)
+            .then((res) => setCategory(res.data.products))
             .catch((err) => console.log(err.message))
     }, [])
 
     return (
         <>
-            <h1 style={{backgroundColor: '#1daed2'}} className='text-white text-center fs-1 p-4 m-3'>{categoryName.toUpperCase()}</h1>
+            <h1 style={{ backgroundColor: '#1daed2' }} className='text-white text-center fs-1 p-4 m-3'>{categoryName.toUpperCase()}</h1>
             <div className="container category-container">
                 <div className="row justify-content-between">
                     <div className="col-lg-12">

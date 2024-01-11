@@ -31,7 +31,6 @@ function UpdateOrder({ getorder, neworder }) {
         axios.put(`/api/order/update-order`, payload)
             .then(json => {
                 neworder(json.data.orders)
-                console.log(json.data)
                 setShow(false)
             })
             .catch(err => {

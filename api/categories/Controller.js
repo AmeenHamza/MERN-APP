@@ -2,6 +2,12 @@ const { connect } = require('mongoose');
 require('dotenv').config();
 const { CategoryDB, CounterDB } = require('./model');
 
+const dummy = (req, res) => {
+    res.json({
+        user: "Hello: " + req.body.user
+    })
+}
+
 const getAllCategories = async (req, res) => {
 
     try {
@@ -186,4 +192,4 @@ const CategoryById = async (req, res) => {
 }
 
 
-module.exports = { getAllCategories, AddCategory, UpdateCategory, deleteCategory, CategoryById }
+module.exports = { getAllCategories, AddCategory, UpdateCategory, deleteCategory, CategoryById, dummy }

@@ -24,7 +24,6 @@ const Signup = () => {
 
             // Connect to our backend
             axios.post(`/api/user/signup`, payload)
-                .then(json => console.log(json))
                 .catch(err => console.log(err))
 
             setEmail("");

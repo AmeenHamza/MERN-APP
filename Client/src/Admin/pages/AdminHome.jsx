@@ -1,8 +1,9 @@
 import React from 'react'
+import Users from './Users'
 
 const AdminHome = () => {
   return (
-    <div>AdminHome</div>
+    <Users />
   )
 }
 

@@ -25,7 +25,7 @@ const Filter = () => {
     }, [])
 
     return (
-        <div className='filter bg-primary'>
+        <div className='filter'>
             <h1 className='text-center pt-3 fw-semibold'>Filter Products</h1>
             {
                 width ? (

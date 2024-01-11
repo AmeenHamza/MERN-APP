@@ -16,5 +16,6 @@ import RelatedProd from "./RelatedProd/RelatedProd";
 import CheckoutForm from "./Checkout/CheckoutForm";
 import CartItems from "./CartItems/CartItems";
 import CheckModal from "./CheckModal/CheckModal";
+import UserProfile from "./UserProfile/UserProfile";
 
-export { Contact, Header, Footer, Card, Filter, Rating, CategoryTitle, Login, Signup, Hero, Popular, Offers, NewCollections, NewsLetter, RelatedProd, CheckoutForm, CartItems, CheckModal }
+export { Contact, Header, Footer, Card, Filter, Rating, CategoryTitle, Login, Signup, Hero, Popular, Offers, NewCollections, NewsLetter, RelatedProd, CheckoutForm, CartItems, CheckModal, UserProfile }

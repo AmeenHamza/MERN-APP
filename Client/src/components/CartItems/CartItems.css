@@ -101,3 +101,69 @@
     color: #fff;
     cursor: pointer;
 }
+
+@media (max-width : 995px) {
+    .cartitems-down {
+        flex-direction: column;
+    }
+
+    .cartitems-promocode {
+        margin-top: 15%;
+    }
+}
+
+@media (max-width : 541px) {
+    .cartitems-promobox {
+        width: 300px;
+        margin-top: 15px;
+        padding-left: 20px;
+        height: 50px;
+    }
+
+    .cartitems-promobox input {
+        height: 50px;
+        width: 200px;
+    }
+
+    .cartitems-promocode button {
+        width: 80px;
+        height: 46px;
+        font-size: 15px;
+    }
+
+    .cartitems-total button {
+        width: 200px;
+        height: 50px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width : 380px) {
+    .cartitems-promobox {
+        width: 250px;
+        margin-top: 15px;
+        padding-left: 15px;
+        height: 50px;
+    }
+
+    .cartitems-promobox input {
+        height: 48px;
+        width: 155px;
+    }
+
+    .cartitems-promocode button {
+        width: 80px;
+        height: 46px;
+        font-size: 14px;
+    }
+
+    .cartitems-total button {
+        width: 180px;
+        height: 50px;
+        font-size: 14px;
+    }
+
+    .cartitems-down {
+        padding: 0 5%;
+    }
+}

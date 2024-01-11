@@ -10,13 +10,13 @@ export const cartContext = createContext();
 
 const ContextProvider = ({ children }) => {
 
-    // Now it's time to show some products on our products page
     useEffect(() => {
-        axios.get('https://fakestoreapi.com/products')
+        axios.get('/api/product/get-products')
             .then((res) => dispatch({
                 type: 'GET_PRODUCTS',
-                payload: res.data
-            }));
+                payload: res.data.products
+            }))
+            .catch((err) => console.log(err))
     }, [])
 
     const cartItems = JSON.parse(localStorage.getItem('cart'));

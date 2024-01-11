@@ -19,20 +19,14 @@ const Checkout = () => {
     const roundedTotal = parseFloat(total.toFixed(2));
 
     useEffect(() => {
-        console.log(order_details);
         setOrderDetails(order_details);  // Set state using the correct variable
     }, [order_details]);
-
-    useEffect(() => {
-        console.log(orderDetails);
-    }, [orderDetails]);
 
     const handleSubmit = () => {
         setCheckStatus(true);
 
         axios.post(`/api/order/place-order`, orderDetails.payload)
             .then(json => {
-                console.log(json.data);
                 setCheck(true);
                 setCheckStatus(false);
                 setResponse(json.data.tracking_id);

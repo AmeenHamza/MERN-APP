@@ -29,12 +29,10 @@ const AdminProducts = () => {
 
         axios.delete(`/api/product/delete-product?id=${productId}`)
             .then(json => {
-                console.log(json.data.message);
                 setProducts(json.data.products);
             })
             .catch(err => {
                 console.log(err);
-                console.log("first");
             });
     };
 

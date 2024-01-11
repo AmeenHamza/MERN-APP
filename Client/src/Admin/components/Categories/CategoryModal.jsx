@@ -20,7 +20,6 @@ function CategoryModal({ getCategory }) {
         // Connect to our backend
         axios.post(`/api/category/add-category`, payload)
             .then(json => {
-                console.log(json)
                 getCategory(json.data.Categories)
                 setShow(false)
                 setCategoryName("")

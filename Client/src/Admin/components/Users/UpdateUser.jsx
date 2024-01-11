@@ -3,15 +3,18 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import '../css/AddCategory.css';
 import axios from 'axios';
+import { FiEdit } from "react-icons/fi";
 import { storage } from '../../utils/FirebaseConfig';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-;
 
-function BrandModal({ getBrands }) {
+function UpdateUser({ getUser, newUser }) {
     const [show, setShow] = useState(false);
-    const [brandName, setBrandName] = useState("");
-    const [brandImage, setBrandImage] = useState("");
-    const [brandCategory, setBrandCategory] = useState("")
+    const [userName, setUserName] = useState(getUser.username);
+    const [email, setEmail] = useState(getUser.email);
+    const [UserImage, setUserImage] = useState(getUser.profile);
+    const [userRole, setUserRole] = useState(getUser.role)
+    const [check, setCheck] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -19,44 +22,57 @@ function BrandModal({ getBrands }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        // For making reference of image/data-files first start with folder name and then /file-name
-        const storageRef = ref(storage, `images/${brandImage.name}`);
+        setIsLoading(true);
 
-        // 'file' comes from the Blob or File API
-        uploadBytes(storageRef, brandImage).then((snapshot) => {
-            // When file is uploaded then make a download url
+        if (check) {
+            const storageRef = ref(storage, `images/${UserImage.name}`);
 
-            getDownloadURL(snapshot.ref)
-                .then((url) => {
+            // 'file' comes from the Blob or File API
+            uploadBytes(storageRef, UserImage).then((snapshot) => {
+                // When file is uploaded then make a download url
 
-                    const payload = { BrandName: brandName, BrandImage: url, Category: brandCategory }
+                getDownloadURL(snapshot.ref)
+                    .then((url) => {
 
-                    // Connect to our backend
-                    axios.post(`/api/brand/add-brand`, payload)
-                        .then(json => {
-                            getBrands(json.data.brands)
-                            setShow(false)
-                        })
-                        .catch(err => console.log(err))
+                        // Connect to our backend
+                        const payload = { username: userName, email, profile: check ? url : UserImage, role: userRole }
 
-                    setBrandCategory("")
-                    setBrandImage("")
-                    setBrandName("")
+                        // Connect to our backend
+                        axios.put(`/api/user/update-user`, payload)
+                            .then(json => {
+                                newUser(json.data.users)
+                                setShow(false)
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
+                    });
 
+
+                // Matlab jo name backend mein recieve karne k lye diya ditto wohi yahan dena h
+            })
+        }
+
+        else {
+
+            // Connect to our backend
+            const payload = { username: userName, email, profile: check ? url : UserImage, role: userRole }
+
+            // Connect to our backend
+            axios.put(`/api/user/update-user`, payload)
+                .then(json => {
+                    newUser(json.data.users)
+                    setShow(false)
                 })
-                .catch((error) => {
-                    console.log(error)
-                });
-
-        });
-
-
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }
+
     return (
         <>
-            <Button variant="dark" onClick={handleShow}>
-                Add Brand
-            </Button>
+            <FiEdit onClick={handleShow} className='cursor' />
 
             <Modal
                 show={show}
@@ -67,33 +83,34 @@ function BrandModal({ getBrands }) {
                 <Modal.Header closeButton>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className="brand-form" onSubmit={handleSubmit}>
-                        <p className="brand-form-title">Add Brands</p>
+                    <form className="User-form" onSubmit={handleSubmit}>
+                        <p className="User-form-title">Update User</p>
                         <div className="input-container">
                             <input
                                 type="text"
-                                placeholder="Enter Brand Name"
-                                value={brandName}
-                                onChange={(e) => setBrandName(e.target.value)}
+                                placeholder="Enter User Name"
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                            />
+                        </div>
+                        <div className="input-container">
+                            <input
+                                type="email"
+                                placeholder="Enter Email"
+                                value={email}
+                                disabled
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                         </div>
                         <div className="input-container">
                             <input
                                 type="text"
                                 placeholder="Enter Category"
-                                value={brandCategory}
-                                onChange={(e) => setBrandCategory(e.target.value)}
+                                value={userRole}
+                                onChange={(e) => setUserRole(e.target.value)}
                             />
                         </div>
-                        {/* <div className="input-container">
-                            <input
-                                type="text"
-                                placeholder="Enter URL"
-                                value={brandImage}
-                                onChange={(e) => setBrandImage(e.target.value)}
-                            />
-                        </div> */}
-                        <div className='brand-file'>
+                        <div className='User-file'>
                             <label className="custom-file-upload m-4 p-4" htmlFor="file" style={{ cursor: 'pointer', border: "2px dashed #cacaca", height: '100px' }}>
                                 <div className="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="" style={{ height: '40px' }} viewBox="0 0 24 24">
@@ -111,18 +128,20 @@ function BrandModal({ getBrands }) {
                                     className='add-image-file'
                                     type="file"
                                     id="file"
-                                    // value={brandImage}
-                                    onChange={(e) => setBrandImage(e.target.files[0])}
+                                    // onClick={() => setCheck(true)}
+                                    onChange={(e) => (
+                                        e.target.files[0] ? (setUserImage(e.target.files[0]), setCheck(true)) : setCheck(false)
+                                    )}
                                 />
                             </label>
+                            <h4 className='ms-5 mb-4'>{check ? UserImage.name : null}</h4>
                         </div>
 
                         <button
                             type="submit"
                             className="submit"
-                        // onClick={() => setShow(false)}
                         >
-                            Add Brand
+                            Update User
                         </button>
                     </form>
 
@@ -132,4 +151,4 @@ function BrandModal({ getBrands }) {
     );
 }
 
-export default BrandModal;
+export default UpdateUser;

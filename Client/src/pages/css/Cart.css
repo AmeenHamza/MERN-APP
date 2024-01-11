@@ -14,8 +14,8 @@ td {
     border: none;
 }
 
-tbody tr td:nth-child(5) {
-    display: flex;
+.cart-div tr td:nth-child(5) {
+    display: flex !important;
     align-items: center;
 }
 
@@ -36,8 +36,8 @@ tbody tr td:nth-child(5) {
         display: none;
     }
 
-    tbody tr td:nth-child(5) {
-        display: flex;
+    .cart-div tr td:nth-child(5) {
+        display: flex !important;
         align-items: center;
     }
 
@@ -64,8 +64,8 @@ tbody tr td:nth-child(5) {
         display: none;
     }
 
-    tbody tr td:nth-child(5) {
-        display: flex;
+    .cart-div tr td:nth-child(5) {
+        display: flex !important;
         align-items: center;
     }
 

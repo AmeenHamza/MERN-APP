@@ -1,28 +1,26 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import './css/Brands.css';
-import { BrandById, BrandModal, UpdateBrand } from '../components';
 import { FallingLines, ColorRing } from 'react-loader-spinner';
-import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Fill } from "react-icons/ri";
-;
+import { ImageModal, UpdateUser, UserByEmail, UserModal } from '../components';
 
-const Brands = () => {
+const Users = () => {
 
-    const [Brands, setBrands] = useState([]);
+    const [users, setUsers] = useState([]);
     const [check, setCheck] = useState(false)
 
-    const getNewBrands = (values) => {
-        setBrands(values);
+    const getNewUsers = (values) => {
+        setUsers(values);
     }
 
-    const getUpdateBrand = (values) => {
-        setBrands(values);
+    const getUpdateUser = (values) => {
+        setUsers(values);
     }
 
     useEffect(() => {
-        axios.get(`/api/brand/get-all-brands`)
-            .then((res) => setBrands(res.data.brands))
+        axios.get(`/api/user/getAllUsers`)
+            .then((res) => setUsers(res.data.users))
             .catch((err) => console.log(err))
     }, [])
 
@@ -31,14 +29,14 @@ const Brands = () => {
         setTimeout(() => {
             setCheck(true);
         }, 1000);
-    }, [Brands])
+    }, [users])
 
-    const handleDelete = (BrandName) => {
+    const handleDelete = (email) => {
         // const payload = { data: { BrandName: BrandName } }; // the data option is used only when you use req.body for delete api 
 
-        axios.delete(`/api/brand/delete-brand?BrandName=${BrandName}`)
+        axios.delete(`/api/user/delete-user?email=${email}`)
             .then(json => {
-                setBrands(json.data.brands);
+                setUsers(json.data.users);
             })
             .catch(err => {
                 console.log(err);
@@ -49,34 +47,36 @@ const Brands = () => {
     return (
         <div>
             <div className='d-flex align-items-center justify-content-between px-5 py-3'>
-                <h2>Brands</h2>
+                <h2>Users</h2>
                 <div className='d-flex gap-3'>
-                    <BrandModal getBrands={getNewBrands} />
-                    <BrandById />
+                    <UserModal getUsers={getNewUsers} />
+                    <UserByEmail />
                 </div>
             </div>
             {
-                Brands?.length > 0 ? (
-                    <div className='px-5 py-3'>
-                        <table className="table table-hover">
+                users?.length > 0 ? (
+                    <div className='px-5 py-3 table-responsive'>
+                        <table className="table table-hover responsive">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Brand Name</th>
-                                    <th scope="col">Category</th>
+                                    <th scope="col">Profile</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Joining</th>
                                     <th scope="col">Edit</th>
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {
-                                    Brands.map((brand, i) => (
+                                    users.map((user, i) => (
                                         <tr key={i}>
-                                            <th scope="row">{brand.id}</th>
+                                            <th scope="row">{i + 1}</th>
                                             <td>{
                                                 check ?
-                                                    (<img className='br-image' src={brand.BrandImage} />)
+                                                    (<ImageModal imageURL={user.profile} />)
                                                     :
                                                     (<ColorRing
                                                         visible={true}
@@ -89,10 +89,12 @@ const Brands = () => {
                                                     />)
                                             }
                                             </td>
-                                            <td>{brand.BrandName}</td>
-                                            <td>{brand.Category}</td>
-                                            <td><UpdateBrand getBrand={brand} newBrand={getUpdateBrand} /></td>
-                                            <td onClick={() => handleDelete(brand.BrandName)}><RiDeleteBin6Fill className='cursor' /></td>
+                                            <td>{user.username}</td>
+                                            <td>{user.email}</td>
+                                            <td>{user.role}</td>
+                                            <td>{user.joining}</td>
+                                            <td><UpdateUser getUser={user} newUser={getUpdateUser} /></td>
+                                            <td onClick={() => handleDelete(user.email)}><RiDeleteBin6Fill className='cursor' /></td>
                                         </tr>
                                     ))
                                 }
@@ -115,4 +117,4 @@ const Brands = () => {
     )
 }
 
-export default Brands
+export default Users

@@ -18,10 +18,11 @@ const SingleProduct = () => {
   const { userState: { user }, state, dispatch } = useCart();
 
   useEffect(() => {
-    axios.get(`https://fakestoreapi.com/products/${productId}`)
-      .then((res) => setProd(res.data))
+    axios.get(`/api/product/find-product?id=${productId}`)
+      .then((res) => setProd(res.data.product))
       .catch((err) => console.log(err))
   }, [])
+
 
   const handleAdd = () => {
     dispatch({

@@ -25,12 +25,9 @@ function OrderByID() {
         // Connect to our backend
         axios.get(`/api/order/order-by-id?_id=${orderId}`)
             .then(json => {
-                console.log(json)
                 setOrderDetails(json.data.order)
             })
             .catch(err => console.log(err))
-
-        console.log(orderId)
     }
 
     const handleClear = (e) => {

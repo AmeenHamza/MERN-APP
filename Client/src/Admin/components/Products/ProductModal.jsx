@@ -46,7 +46,6 @@ function ProductModal({ getProducts }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        console.log(image)
 
         // For making reference of image/data-files first start with folder name and then /file-name
         const storageRef = ref(storage, `images/${image.name}`);
@@ -58,14 +57,11 @@ function ProductModal({ getProducts }) {
             getDownloadURL(snapshot.ref)
                 .then((url) => {
 
-                    console.log(url)
-
                     const payload = { title, price, description, category, image: url, rating: { rate, count: stock } }
 
                     // Connect to our backend
                     axios.post(`/api/product/addProduct`, payload)
                         .then(json => {
-                            console.log(json)
                             getProducts(json.data.products)
                             setShow(false)
                         })

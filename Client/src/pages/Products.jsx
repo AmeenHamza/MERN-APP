@@ -52,7 +52,7 @@ const Products = () => {
                     <div className="col-lg-8 col-xl-8 col-md-12 col-sm-12 col-12 mt-5 mt-xl-0 mt-lg-0">
                         <div className="products-container row justify-content-evenly">
                             {
-                                products.length > 0 ? (
+                                products?.length > 0 ? (
                                     filterProducts().map((prod) => (
                                         <div key={prod.id} className="col-lg-4 col-md-4 col-sm-5 col-5 my-xl-5 my-lg-5 my-0">
                                             <Card details={prod} />

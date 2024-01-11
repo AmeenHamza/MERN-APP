@@ -7,7 +7,7 @@ const Popular = () => {
 
     const {state : {products}} = useCart();
     
-    const popularInWomen = products.filter((women) => women.category === "women's clothing" );
+    const popularInWomen = products?.filter((women) => women.category === "women's clothing" );
 
     return (
         <div className='popular'>
@@ -15,7 +15,7 @@ const Popular = () => {
             <hr />
             <div className="popular-item">
                 {
-                    popularInWomen.map((prod,index) => (
+                    popularInWomen?.map((prod,index) => (
                         index < 4 ? (
                             <Card key={prod.id} details={prod} />
                         ) : (

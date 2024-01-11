@@ -77,11 +77,11 @@ const addProduct = async (req, res) => {
 
 const productByName = async (req, res) => {
 
-    const { title } = req.query;
+    const { id } = req.query;
 
-    if (!title) {
+    if (!id) {
         res.json({
-            message: "Please provide a name of product"
+            message: "Please provide a id of product"
         })
     }
     else {
@@ -90,7 +90,7 @@ const productByName = async (req, res) => {
             await connect(process.env.MONGO_URI)
             console.log("Connected")
 
-            const oneProduct = await productDB.findOne({ title: title }).select({ _id: 0 })
+            const oneProduct = await productDB.findOne({ id }).select({ _id: 0 })
 
             if (oneProduct) {
                 res.status(200).json({
@@ -214,13 +214,13 @@ const byCategory = async (req, res) => {
             const byCategory = await productDB.find({ category })
             if (byCategory) {
                 res.json({
-                    message : "Products found",
-                    products : byCategory
+                    message: "Products found",
+                    products: byCategory
                 })
             }
             else {
                 res.json({
-                    message : "No product found with name of this category"
+                    message: "No product found with name of this category"
                 })
             }
 

@@ -10,7 +10,7 @@ const Cart = () => {
   const { state, dispatch } = useCart();
 
   return (
-    <div className='container my-5'>
+    <div className='container my-5 cart-div'>
       <Table responsive='md'>
         <thead>
           <tr className='mb-4'>
@@ -37,7 +37,7 @@ const Cart = () => {
                 <td>${Math.ceil((prod.price - 5) * prod.qty)}</td>
                 <td>
                   <button
-                    className='btn btn-dark mx-3'
+                    className='btn btn-dark mx-md-3 mx-xl-3 mx-lg-3 mx-sm-3 mx-1'
                     onClick={() => dispatch({
                       type: 'CHANGE_QTY',
                       payload: {
@@ -50,7 +50,7 @@ const Cart = () => {
                   </button>
                   {prod.qty}
                   <button
-                    className='btn btn-dark mx-3'
+                    className='btn btn-dark mx-md-3 mx-xl-3 mx-lg-3 mx-sm-3 mx-1'
                     disabled={prod.qty === 1}
                     onClick={() => dispatch({
                       type: 'CHANGE_QTY',

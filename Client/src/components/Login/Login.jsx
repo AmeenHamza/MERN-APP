@@ -29,7 +29,6 @@ const Login = () => {
             axios.post(`/api/user/login`, payload)
                 .then(json => {
                     setMessage(true)
-                    console.log(json.data.message)
                     Cookies.set("token", json.data.token, { expires: 7 })
                     userDispatch({
                         type: 'LOGIN'

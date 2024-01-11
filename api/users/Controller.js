@@ -120,4 +120,130 @@ const signup = async (req, res) => {
 
 }
 
-module.exports = { login, signup, getAllUsers }
+const updateUser = async (req, res) => {
+
+    const { username, email, role, profile } = req.body;
+
+    try {
+
+        // Now we successfully made a connection of DataBase
+        await connect(process.env.MONGO_URI)
+        console.log("DB Connected")
+
+        // Now we handle the duplicationin database
+        const checkExist = await userDB.exists({ email: email })
+
+        if (!checkExist) {
+            res.status(404).json({
+                message: "User Not found!"
+            })
+        }
+        else {
+            // Now we insert the data in our db
+            // We need to encrpyt password so attach a hash function with password
+            const filter = { email }
+            const update = { username, email, role, profile }
+
+            const updatedUser = await userDB.findOneAndUpdate(filter, update, {
+                new: true
+            })
+
+            const all_users = await userDB.find().select({ _id: 0, password: 0 })
+            const token = sign({
+                username: updatedUser.username,
+                id: updatedUser._id,
+                email: updatedUser.email,
+                profile: updatedUser.profile,
+                role: updatedUser.role
+            },
+                process.env.JWT_SECRET
+            )
+
+            if (updatedUser) {
+                res.status(202).json({
+                    message: "User updated successfully",
+                    users: all_users,
+                    updated_user: updatedUser,
+                    token: token
+                })
+            }
+
+        }
+
+    } catch (error) {
+        res.json({
+            message: "Error " + error
+        })
+    }
+
+}
+
+const deleteUser = async (req, res) => {
+
+    const { email } = req.query;
+
+    if (!email) {
+        res.status(404).json({ message: "Please provide user details" })
+    }
+    else {
+        try {
+
+            await connect(process.env.MONGO_URI)
+            console.log("Connected")
+
+            const deleted_user = await userDB.findOneAndDelete({ email })
+            const all_users = await userDB.find().select({ _id: 0 })
+
+            if (deleted_user) {
+                res.status(200).json({
+                    message: "User delete successfully!",
+                    users: all_users
+                })
+            }
+
+        } catch (error) {
+            res.status(200).json({
+                Error: "Error: " + error
+            })
+        }
+    }
+
+}
+
+const findUser = async (req, res) => {
+
+    const { email } = req.query;
+
+    if (!email) {
+        res.status(404).json({ message: "Please provide user details" })
+    }
+    else {
+        try {
+
+            await connect(process.env.MONGO_URI)
+            console.log("Connected")
+
+            const user = await userDB.findOne({ email })
+
+            if (user) {
+                res.status(200).json({
+                    message: "User found!",
+                    user: user
+                })
+            }
+            else {
+                res.status(404).json({
+                    message: "User not found!"
+                })
+            }
+
+        } catch (error) {
+            res.status(200).json({
+                Error: "Error: " + error
+            })
+        }
+    }
+
+}
+
+module.exports = { login, signup, getAllUsers, updateUser, deleteUser, findUser }

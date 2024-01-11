@@ -24,12 +24,9 @@ function CategoryById() {
         // Connect to our backend
         axios.get(`/api/category/category-by-id?CategoryName=${categoryName}`)
             .then(json => {
-                console.log(json)
                 setcategoryDetails(json.data.Category)
             })
             .catch(err => console.log(err))
-
-        console.log(categoryName)
     }
 
     const handleClear = (e) => {

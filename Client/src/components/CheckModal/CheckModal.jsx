@@ -20,7 +20,7 @@ const CheckModal = ({ token }) => {
                 show={smShow}
                 onHide={() => {
                     setSmShow(false)
-                    navigate('/')
+                    navigate('/cart')
                 }}
                 aria-labelledby="example-modal-sizes-title-sm"
                 backdrop="static"

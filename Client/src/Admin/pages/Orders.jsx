@@ -29,12 +29,10 @@ const Orders = () => {
 
         axios.delete(`/api/order/delete-order?_id=${orderId}`)
             .then(json => {
-                console.log(json.data.message);
                 setOrders(json.data.orders);
             })
             .catch(err => {
                 console.log(err);
-                console.log("first");
             });
     };
 

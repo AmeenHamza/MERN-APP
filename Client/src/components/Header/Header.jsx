@@ -10,12 +10,19 @@ import './Header.css';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import logo from '../assets/logo.png';
+import arrow from '../assets/arow.png';
+import logout from '../assets/logout.png';
+import help from '../assets/help.png';
+import settings from '../assets/setting.png';
+import display from '../assets/display.png';
+import feedback from '../assets/feedback.png';
 import cart_icon from '../assets/cart_icon.png';
 import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
 
   const [isNavExpanded, setIsNavExpanded] = useState(false);
+  const [check, setCheck] = useState(false);
 
   const [colorChange, setColorchange] = useState(false);
   const changeNavbarColor = () => {
@@ -36,7 +43,7 @@ const Header = () => {
 
 
   // Aese bhi lesakte h or state.cart karke bhi isse faida ye hua k destructure karke cart ek variable bangaya
-  const { userState: { user,details }, userDispatch, state: { cart }, dispatch, productDispatch } = useCart();
+  const { userState: { user, details }, userDispatch, state: { cart }, dispatch, productDispatch } = useCart();
 
   const notify = () => {
 
@@ -130,10 +137,67 @@ const Header = () => {
             </Link>
             <div className="nav-cart-count">{cart.length}</div>
           </div>
-          <div className='user-icon ms-5 d-flex flex-column'>
-            <img src={user ? details.profile : null} />
-            <h5>{user ? details.username : null}</h5>
-          </div>  
+          {/* user-icon ms-sm-5 ms-md-5 ms-lg-5 ms-xl-5 d-flex flex-column */}
+          {/* onclick={settingsMenuToggle ? settingsMenuToggle : null} */}
+          <div className="nav-user-icon" onClick={() => setCheck((prev) => !prev)}>
+            <img src={user ? details.profile : null} alt="" />
+          </div>
+          {/* User Profile */}
+
+          {
+            user ? (
+              <div className={`${check ? 'settings-menu-display' : 'settings-menu'}`}>
+                <div id="dark-btn">
+                  <span></span>
+                </div>
+                <div className="settings-menu-inner">
+                  <div className="user-profile">
+                    <img src={user ? details.profile : null} alt="" />
+                    <div>
+                      <p> {user ? details.username : null} </p>
+                      <p>{user ? details.email : null}</p>
+                      <Link to="/user"> See your profile </Link>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="user-profile">
+                    <img src={feedback} alt="" />
+                    <div>
+                      <p> Give Feedback </p>
+                      <a href="#"> Help us to improve our design by giving a feedback </a>
+                    </div>
+                  </div>
+                  <hr />
+                  <div className="settings-links">
+                    <img src={settings} className="settings-icon" alt="" />
+                    <a href="#"> Settings & Privacy <img src={arrow} width="10px" alt="" /></a>
+                  </div>
+                  <div className="settings-links">
+                    <img src={help} className="settings-icon" alt="" />
+                    <a href="#"> Help & Support <img src={arrow} width="10px" alt="" /></a>
+                  </div>
+                  <div className="settings-links">
+                    <img src={display} className="settings-icon" alt="" />
+                    <a href="#"> Display & Access <img src={arrow} width="10px" alt="" /></a>
+                  </div>
+                  <div
+                    className="settings-links"
+                    onClick={() => userDispatch({
+                      type: 'LOGOUT'
+                    })}
+                  >
+                    <img src={logout} className="settings-icon" alt="" />
+                    <a href="#"> Logout <img src={arrow} width="10px" alt="" /></a>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              null
+            )
+          }
+
+
+          {/* User Profile Ends */}
         </Container>
       </Navbar>
     </>

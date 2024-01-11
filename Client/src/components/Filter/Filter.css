@@ -4,6 +4,7 @@
     margin-top: 12px;
     position: fixed;
     color: #fff;
+    background-color: #ef8d9e;
 }
 
 .filter h1 {
@@ -46,7 +47,7 @@
         min-height: 67vh;
         height: auto;
     }
-    
+
     .filter h1 {
         font-size: 26px;
     }
